@@ -5,6 +5,8 @@ namespace App\Filament\User\Resources;
 use App\Filament\User\Resources\SmsBulkMessageResource\Pages;
 use App\Models\SmsBulkMessage;
 use App\Models\VendorConfiguration;
+use App\Models\Lead;
+use App\Models\Campaign;
 use Illuminate\Database\Eloquent\Builder;
 // use App\Models\SmsSenderId;
 use Filament\Forms;
@@ -17,9 +19,17 @@ use Filament\Tables\Actions\Action;
 use App\Exports\SmsBulkMessagesExport;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportHeaderAction;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Section as FormSection;
+use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\TagsInput;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\ViewField; 
 
 use Maatwebsite\Excel\Facades\Excel;
 use Filament\Forms\Components\Select;
+use Filament\Notifications\Notification;
 
 
 class SmsBulkMessageResource extends Resource
@@ -47,6 +57,13 @@ class SmsBulkMessageResource extends Resource
                     ->preload()
                     ->searchable()
                     ->nullable(),
+                
+                Forms\Components\Select::make('campaign_id')
+                    ->label('Select Campaign')
+                    ->options(fn () => Campaign::where('user_id', auth()->id())->pluck('name', 'id'))
+                    ->searchable()
+                    ->required()
+                    ->visible(fn () => Campaign::where('user_id', auth()->id())->exists()),                    
 
                 Forms\Components\Select::make('service_id')
                     ->label('Service')
@@ -71,29 +88,108 @@ class SmsBulkMessageResource extends Resource
                     ->searchable()
                     ->required(),
 
-
-
                 Forms\Components\Textarea::make('content')
                     ->label('Message Content')
                     ->rows(4)
                     ->required(),
+               
+                // Right column (2nd column)
+                        FormSection::make('Recipients')
+                            ->columnSpan(1)
+                            ->schema([
+                                Radio::make('input_method')
+                                    ->label('Select Input Method')
+                                    ->options([
+                                        'manual' => 'Manual Entry',
+                                        'csv' => 'Upload CSV File',
+                                        'lead' => 'From Lead List',
+                                    ])
+                                    ->default('manual')
+                                    ->inline()
+                                    ->reactive(),
 
-                Forms\Components\Repeater::make('recipients')
-                    ->label('Recipients List')
-                    ->schema([
-                        Forms\Components\TextInput::make('number')
-                            ->label('Recipient Number')
-                            ->required(),
-                    ])
-                    ->columns(1)
-                    ->required(),
+                                
+                                //  Show only the logged-in user’s leads
+                                Select::make('lead_id')
+                                    ->label('Select Lead Name')
+                                    ->options(function () {
+                                        // leads fetch for logged-in user
+                                        $leads = Lead::where('user_id', auth()->id())
+                                            ->select('name', 'id') 
+                                            ->get()
+                                            ->groupBy('name');  
 
-                Forms\Components\TextInput::make('total_recipients')
-                    ->label('Total Recipients')
-                    ->numeric()
-                    ->default(0)
-                    ->disabled(),
+                                        $options = [];
+                                        foreach ($leads as $name => $group) {
+                                            $count = $group->count(); // row count according to name
+                                            // if name null, then shows phone number
+                                            $displayName = $name ?? $group->first()->phone;
+                                            // dropdown option
+                                            $options[$group->first()->id] = "{$displayName} ({$count})";
+                                        }
 
+                                        return $options;
+                                    })
+                                    ->searchable()
+                                    ->placeholder('Select a lead')
+                                    ->visible(fn ($get) => $get('input_method') === 'lead'),
+
+                                TagsInput::make('recipients')
+                                    ->label('Receiver Numbers')
+                                    ->placeholder('8801XXXXXXXXX')
+                                    ->required()
+                                    ->reactive()
+                                    ->separator(',')
+                                    ->visible(fn ($get) => $get('input_method') === 'manual')
+                                    ->helperText('Enter multiple numbers separated by commas. Only valid Bangladeshi phone numbers are allowed.')
+                                    ->afterStateUpdated(function ($state, callable $set) {
+                                        if (is_array($state)) {
+                                            foreach ($state as $value) {
+                                                // Remove all non-digit characters
+                                                $number = preg_replace('/\D/', '', $value);
+
+                                                // Validate Bangladeshi number format (+8801XXXXXXXXX or 8801XXXXXXXXX or 01XXXXXXXXX)
+                                                if (!preg_match('/^(?:\+?88)?01[3-9]\d{8}$/', $number)) {
+                                                    Notification::make()
+                                                        ->title('Invalid Phone Number')
+                                                        ->body("{$value} is not a valid Bangladeshi number. Format: 8801XXXXXXXXX")
+                                                        ->danger()
+                                                        ->send();
+
+                                                    // Optionally, remove invalid numbers
+                                                    $set('recipients', array_filter($state, fn ($num) => $num !== $value));
+
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }),
+                                                                   
+                                FileUpload::make('recipients_csv')
+                                    ->label('Upload CSV of Numbers')
+                                    ->helperText('Upload a CSV file containing phone numbers in one column.')
+                                    ->disk('public')
+                                    ->directory('recipients')
+                                    ->acceptedFileTypes(['text/csv', 'text/plain'])
+                                    ->maxSize(2048)
+                                    ->visible(fn ($get) => $get('input_method') === 'csv'),
+
+
+                                // Sample CSV download link
+                                ViewField::make('sample_csv_link')
+                                    ->view('filament.user.pages.sample-csv-link')
+                                    ->visible(fn ($get) => $get('input_method') === 'csv'),    
+                                ]),
+                                        
+                // Forms\Components\TextInput::make('total_recipients')
+                //     ->label('Total Recipients')
+                //     ->numeric()
+                //     ->default(0)
+                //     ->disabled(),
+                // Forms\Components\Textarea::make('content')
+                //     ->label('Message Content')
+                //     ->rows(4)
+                //     ->required(),                
                 Forms\Components\TextInput::make('success_count')
                     ->label('Success Count')
                     ->numeric()
@@ -212,24 +308,24 @@ class SmsBulkMessageResource extends Resource
                     ->preload(),
 
                 // Sent Status Filter
-                Tables\Filters\TernaryFilter::make('is_sent')
-                    ->label('Sent Status')
-                    ->trueLabel('Sent')
-                    ->falseLabel('Not Sent')
-                    ->queries(
-                        true: fn (Builder $query) => $query->where('is_sent', true),
-                        false: fn (Builder $query) => $query->where('is_sent', false),
-                        blank: fn (Builder $query) => $query,
-                    ),
+                // Tables\Filters\TernaryFilter::make('is_sent')
+                //     ->label('Sent Status')
+                //     ->trueLabel('Sent')
+                //     ->falseLabel('Not Sent')
+                //     ->queries(
+                //         true: fn (Builder $query) => $query->where('is_sent', true),
+                //         false: fn (Builder $query) => $query->where('is_sent', false),
+                //         blank: fn (Builder $query) => $query,
+                //     ),
 
-                //  Tables\Filters\SelectFilter::make('status')
-                //         ->options([
-                //             'pending' => 'Pending',
-                //             'processing' => 'Processing',
-                //             'sent' => 'Sent',
-                //             'partial' => 'Partial',
-                //             'failed' => 'Failed',
-                //         ]),    
+                Tables\Filters\SelectFilter::make('status')
+                        ->options([
+                            'pending' => 'Pending',
+                            'processing' => 'Processing',
+                            'sent' => 'Sent',
+                            'partial' => 'Partial',
+                            'failed' => 'Failed',
+                        ]),    
 
                 // Created Date Range Filter
                 Tables\Filters\Filter::make('created_at')

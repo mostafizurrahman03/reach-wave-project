@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete(); // Optional if client = user
             $table->string('client_api_key')->unique();
-            $table->string('client_secret_key');
+            $table->string('client_secret_key')->unique();
             $table->decimal('balance', 14, 2)->default(0);
             $table->decimal('rate_per_sms', 8, 2)->default(0.00);
             $table->json('sender_ids')->nullable(); // multiple sender IDs(like 8809610980262)

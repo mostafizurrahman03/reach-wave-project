@@ -32,7 +32,7 @@ class ClientConfiguration extends Model
         'is_active' => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
-        'sender_ids',
+        'sender_ids' => 'array',
     ];
 
     /** RELATIONSHIPS **/

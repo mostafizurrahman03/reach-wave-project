@@ -1,0 +1,12 @@
+<?php
+
+namespace App\Filament\User\Resources\WalletTopupResource\Pages;
+
+use App\Filament\User\Resources\WalletTopupResource;
+use Filament\Actions;
+use Filament\Resources\Pages\CreateRecord;
+
+class CreateWalletTopup extends CreateRecord
+{
+    protected static string $resource = WalletTopupResource::class;
+}

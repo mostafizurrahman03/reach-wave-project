@@ -65,4 +65,9 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->hasMany(Campaign::class);
     }
+    
+    public function clientConfigurations()
+    {
+        return $this->hasMany(ClientConfiguration::class);
+    }
 }
