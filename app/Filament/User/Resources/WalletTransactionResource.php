@@ -27,8 +27,15 @@ class WalletTransactionResource extends Resource
      */
     public static function getEloquentQuery(): Builder
     {
+        $client = auth()->user()->client;   // relationship from User → ClientConfiguration
+
+        if (! $client) {
+            // if user has no client, show nothing
+            return parent::getEloquentQuery()->whereRaw('1 = 0');
+        }
+
         return parent::getEloquentQuery()
-            ->where('client_id', auth()->user()->client_id);
+            ->where('client_id', $client->id);
     }
 
     public static function form(Form $form): Form
@@ -97,7 +104,7 @@ class WalletTransactionResource extends Resource
                     ]),
             ])
             ->defaultSort('id', 'desc')
-            ->actions([]) // no edit
+            ->actions([])      // no edit
             ->bulkActions([]); // no delete
     }
 

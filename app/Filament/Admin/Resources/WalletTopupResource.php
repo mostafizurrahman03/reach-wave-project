@@ -13,6 +13,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\DB;
+use App\Services\WalletService;
 
 
 class WalletTopupResource extends Resource
@@ -103,23 +104,62 @@ class WalletTopupResource extends Resource
     // TOPUP APPROVAL LOGIC
     // ------------------------
 
-    public static function approveTopup($topup)
+    // public static function approveTopup($topup)
+    // {
+    //     DB::transaction(function () use ($topup) {
+    //         // Mark as approved
+    //         $topup->update([
+    //             'status' => 'approved',
+    //             'approved_by' => auth()->id(),
+    //             'approved_at' => now(),
+    //         ]);
+
+    //         // Add money to wallet
+    //         $topup->client->increment('balance', $topup->amount);
+    //     });
+    // }
+
+    // public static function rejectTopup($topup)
+    // {
+    //     $topup->update([
+    //         'status' => 'rejected',
+    //         'approved_by' => auth()->id(),
+    //         'approved_at' => now(),
+    //     ]);
+    // }
+
+     public static function approveTopup($topup)
     {
         DB::transaction(function () use ($topup) {
-            // Mark as approved
+
+            if ($topup->status !== 'pending') {
+                throw new \Exception('This topup is already processed.');
+            }
+
+            //  Credit wallet + create ledger
+            WalletService::credit(
+                $topup->client_id,
+                $topup->amount,
+                'payment',
+                $topup->trx_id,
+                'Topup approved via ' . $topup->payment_method
+            );
+
+            //  Mark topup approved
             $topup->update([
                 'status' => 'approved',
                 'approved_by' => auth()->id(),
                 'approved_at' => now(),
             ]);
-
-            // Add money to wallet
-            $topup->client->increment('balance', $topup->amount);
         });
     }
 
     public static function rejectTopup($topup)
     {
+        if ($topup->status !== 'pending') {
+            throw new \Exception('This topup is already processed.');
+        }
+
         $topup->update([
             'status' => 'rejected',
             'approved_by' => auth()->id(),

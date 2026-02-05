@@ -43,6 +43,11 @@ class ClientConfiguration extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function walletTransactions(): HasMany
+    {
+        return $this->hasMany(WalletTransaction::class, 'client_id');
+    }
+
     /*
      * IMPORTANT NOTE:
      * No "service()" relationship exists in your migration.
