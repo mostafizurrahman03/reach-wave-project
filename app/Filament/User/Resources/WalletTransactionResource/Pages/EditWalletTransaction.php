@@ -16,4 +16,11 @@ class EditWalletTransaction extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['user_id'] = auth()->id();
+        $data['vendor_configuration_id'] = auth()->user()->vendor_configuration_id;
+        return $data;
+    }
+
 }

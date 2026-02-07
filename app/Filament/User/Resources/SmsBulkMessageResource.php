@@ -29,6 +29,7 @@ use Filament\Forms\Components\ViewField;
 
 use Maatwebsite\Excel\Facades\Excel;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Hidden;
 use Filament\Notifications\Notification;
 
 
@@ -44,19 +45,26 @@ class SmsBulkMessageResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
-                    ->default(auth()->id())
-                    ->relationship('user', 'name')
-                    ->preload()
-                    ->searchable()
+                // Forms\Components\Select::make('user_id')
+                //     ->default(auth()->id())
+                //     ->relationship('user', 'name')
+                //     ->preload()
+                //     ->searchable()
+                //     ->required(),
+                Forms\Components\Hidden::make('user_id')
+                    ->default(fn () => auth()->id())
                     ->required(),
 
-                Forms\Components\Select::make('vendor_configuration_id')
-                    ->label('Vendor')
-                    ->relationship('vendorConfiguration', 'vendor_name')
-                    ->preload()
-                    ->searchable()
-                    ->nullable(),
+                // Forms\Components\Select::make('vendor_configuration_id')
+                //     ->label('Vendor')
+                //     ->relationship('vendorConfiguration', 'vendor_name')
+                //     ->preload()
+                //     ->searchable()
+                //     ->nullable(),
+                
+                Hidden::make('vendor_configuration_id')
+                    ->default(fn () => auth()->user()?->vendor_configuration_id)
+                    ->required(),
                 
                 Forms\Components\Select::make('campaign_id')
                     ->label('Select Campaign')
