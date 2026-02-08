@@ -17,10 +17,20 @@
     <div class="max-w-7xl mx-auto px-4">
         <div class="flex h-16 items-center justify-between">
             <!-- Brand -->
-            <a href="{{ route('home') }}" class="flex items-center gap-2 group">
+            <!-- <a href="{{ route('home') }}" class="flex items-center gap-2 group">
                 <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#0F7B71] text-white font-bold">RW</span>
                 <span class="text-2xl font-extrabold tracking-tight text-gray-900 group-hover:text-[#0F7B71] transition-colors">ReachWave</span>
+            </a> -->
+            <a href="{{ route('home') }}" class="flex items-center gap-2 group">
+                <!-- Logo Image -->
+                <img src="/storage/images/logo.png" alt="ReachWave Logo" class="h-14 w-14 rounded-lg object-cover">
+
+                <!-- Brand Name -->
+                <!-- <span class="text-2xl font-extrabold tracking-tight text-gray-900 group-hover:text-[#0F7B71] transition-colors">
+                    ReachWave
+                </span> -->
             </a>
+
 
             <!-- Desktop Nav -->
             <div class="hidden sm:flex items-center gap-6">
@@ -38,6 +48,11 @@
                         <a href="{{ route('contact') }}" class="px-1.5 py-1 rounded transition-colors {{ request()->routeIs('contact') ? 'text-[#0F7B71]' : 'text-gray-700 hover:text-[#0F7B71]' }}">Contact Us</a>
                     </li>
                 </ul>
+                  <!-- Login Button -->
+                <a href="{{ route('filament.user.auth.login') }}"
+                   class="inline-flex items-center gap-2 rounded-lg border border-[#0F7B71] px-3.5 py-2 text-[#0F7B71] text-lg font-semibold hover:bg-[#0F7B71]/10 transition">
+                    Login
+                </a>
                 <a href="{{ route('filament.user.auth.register') }}" class="inline-flex items-center gap-2 rounded-lg bg-[#0F7B71] px-3.5 py-2 text-white text-lg font-semibold shadow hover:bg-[#0F7B71]/90 transition-colors">
                     Get Started
                     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
@@ -83,7 +98,7 @@
                 @php
                     use App\Models\SocialLink;
 
-                    // শুধুমাত্র active এবং order_by অনুযায়ী sort করা
+                    // sort according to active and order_by
                     $socialLinks = SocialLink::where('is_active', true)
                         ->orderBy('order_by')
                         ->get();

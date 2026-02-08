@@ -1,9 +1,22 @@
 <div class="relative overflow-hidden">
     <!-- Hero Section -->
-    <section class="bg-gradient-to-br from-[#0F7B71]/10 via-white to-[#0F7B71]/10">
-        <div class="max-w-7xl mx-auto px-6 py-16 sm:py-24 grid lg:grid-cols-2 gap-10 items-center">
+    <section class="relative overflow-hidden">
+
+        <!-- Background Image -->
+        <div class="absolute inset-0">
+            <img src="/storage/images/hero-bg.png" 
+                class="w-full h-full object-cover"
+                alt="Background">
+            <!-- Gradient overlay -->
+            <div class="absolute inset-0 bg-gradient-to-br from-[#0F7B71]/90 via-white/70 to-[#0F7B71]/90"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative max-w-7xl mx-auto px-6 py-16 sm:py-24 grid lg:grid-cols-2 gap-10 items-center">
+
+            <!-- LEFT -->
             <div>
-                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0F7B71]/10 text-[#0F7B71] text-xs font-semibold">
+                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0F7B71]/20 text-white text-xs font-semibold">
                     Omnichannel Communication Platform
                 </span>
 
@@ -12,7 +25,7 @@
                     <span class="text-[#0F7B71]">WhatsApp, SMS & Voice</span>
                 </h1>
 
-                <p class="mt-5 text-lg text-gray-600 max-w-xl">
+                <p class="mt-5 text-lg text-gray-700 max-w-xl">
                     Engage your audience through WhatsApp messaging, non-masking bulk SMS,
                     and voice broadcasting — all from a single, powerful platform with automation
                     and real-time delivery insights.
@@ -20,25 +33,17 @@
 
                 <div class="mt-8 flex flex-col sm:flex-row gap-3">
                     <a href="{{ route('features') }}"
-                    class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#0F7B71] hover:bg-[#0F7B71]/90 text-white font-semibold shadow">
+                    class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#0F7B71] hover:bg-[#0F7B71]/90 text-white font-semibold shadow-lg">
                         Get Started
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                        </svg>
                     </a>
 
                     <a href="{{ route('contact') }}"
-                    class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-gray-300 hover:border-gray-400 text-gray-800 font-semibold bg-white">
+                    class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white/80 backdrop-blur border border-white hover:bg-white text-gray-800 font-semibold shadow">
                         Talk to Sales
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.8L3 20l.8-5A8.98 8.98 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
-                        </svg>
                     </a>
                 </div>
 
-                <div class="mt-8 flex items-center gap-6 text-sm text-gray-500">
+                <div class="mt-8 flex items-center gap-6 text-sm text-gray-800">
                     <div class="flex items-center gap-2">
                         <span class="inline-block h-2.5 w-2.5 rounded-full bg-[#0F7B71]"></span>
                         High-delivery rate
@@ -54,8 +59,8 @@
                 </div>
             </div>
 
-            <!-- Mock UI Card -->
-            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+            <!-- RIGHT CARD -->
+            <!-- <div class="bg-white/90 backdrop-blur rounded-2xl shadow-2xl border border-white p-6">
                 <div class="flex items-center justify-between pb-4 border-b">
                     <div class="flex items-center gap-3">
                         <div class="h-9 w-9 rounded-lg bg-[#0F7B71] text-white flex items-center justify-center font-bold">WR</div>
@@ -66,6 +71,7 @@
                     </div>
                     <span class="text-xs px-2 py-1 rounded-full bg-[#0F7B71]/10 text-[#0F7B71]">Active</span>
                 </div>
+
                 <div class="grid sm:grid-cols-3 text-center divide-y sm:divide-y-0 sm:divide-x mt-4">
                     <div class="py-3">
                         <div class="text-2xl font-extrabold text-gray-900">12.4k</div>
@@ -80,12 +86,15 @@
                         <div class="text-xs text-gray-500">Read</div>
                     </div>
                 </div>
+
                 <div class="mt-4 rounded-xl bg-gray-50 p-4 text-sm text-gray-600">
                     “Personalized offers boosted our response rate. Setup was simple and delivery was instant.”
                 </div>
-            </div>
+            </div> -->
+
         </div>
     </section>
+
 
     <!-- Quick Features -->
     <section class="py-14 bg-gradient-to-b from-white to-[#0F7B71]/5">

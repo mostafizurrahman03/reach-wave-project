@@ -8,7 +8,7 @@
       Send broadcasts, manage conversations, build workflows and convert leads faster — all in one place.
     </p>
 
-    <div class="mt-8 flex justify-center gap-4">
+    <div class="mt-8 flex justify-center gap-4 py-4">
       <a href="{{ route('contact') }}" class="px-6 py-3 rounded-xl bg-[#0F7B71] text-white font-semibold shadow hover:bg-[#0F7B71]/90 transition">
         Get a Demo
       </a>
@@ -148,12 +148,12 @@
   </div>
 
   <!-- CTA -->
-  <div class="bg-white py-20">
+  <div class="bg-white py-20 rounded-2xl">
     <div class="max-w-7xl mx-auto px-6">
       <div class="bg-[#0F7B71] text-white text-center py-14 rounded-3xl">
         <h2 class="text-3xl font-bold mb-3">Ready to Transform Your Customer Communication?</h2>
         <p class="text-sm opacity-90 mb-6">Start free or talk to our product expert.</p>
-        <a href="{{ route('contact') }}" class="px-8 py-3 rounded-xl bg-white text-[#0F7B71] font-semibold hover:bg-gray-100 transition">
+        <a href="{{ route('contact') }}" class="px-8 py-3 p-4 rounded-xl bg-white text-[#0F7B71] font-semibold hover:bg-gray-100 transition">
           Book a Demo
         </a>
       </div>
