@@ -31,9 +31,12 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->brandName('ReachWave')
+            ->brandLogo(asset('/storage/images/logo.png'))
+            ->brandLogoHeight('5rem')
             ->profile() 
             ->colors([
-                'primary' => Color::Green,
+                // 'primary' => Color::Green,
+                'primary' => Color::hex('#0badb5'),   // Blue
             ])
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')

@@ -56,7 +56,7 @@ class WalletTransactionResource extends Resource
 
                 BadgeColumn::make('type')
                     ->colors([
-                        'success' => 'credit',
+                        'primary' => 'credit',
                         'danger' => 'debit',
                     ])
                     ->sortable(),

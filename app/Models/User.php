@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-
+use Illuminate\Auth\Passwords\CanResetPassword as CanResetPasswordTrait;
 // Spatie
 use Spatie\Permission\Traits\HasRoles;
 
@@ -16,6 +16,7 @@ use Filament\Panel;
 
 class User extends Authenticatable implements FilamentUser
 {
+    use CanResetPasswordTrait;
     use HasFactory, Notifiable, HasRoles;
 
     protected $fillable = [

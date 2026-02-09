@@ -61,7 +61,7 @@ class SmsBulkMessageResource extends Resource
                 //     ->preload()
                 //     ->searchable()
                 //     ->nullable(),
-                
+
                 Hidden::make('vendor_configuration_id')
                     ->default(fn () => auth()->user()?->vendor_configuration_id)
                     ->required(),
@@ -362,7 +362,7 @@ class SmsBulkMessageResource extends Resource
                     ->fileName('bulk_send_message_recipients')
                     ->defaultFormat('xlsx')
                     ->withHiddenColumns()
-                    ->color('success')
+                    ->color('primary')
                     ->icon('heroicon-o-arrow-down-tray'),
             ])
 

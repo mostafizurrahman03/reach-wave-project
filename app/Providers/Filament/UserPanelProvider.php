@@ -27,10 +27,14 @@ class UserPanelProvider extends PanelProvider
             ->path('user')
             ->login()
             ->brandName('WhatsReach')
-            ->profile() 
+            ->brandLogo(asset('/storage/images/logo.png'))
+            ->brandLogoHeight('5rem')
+            ->profile()
+            ->passwordReset() 
             ->registration()
             ->colors([
-                'primary' => Color::Green,
+                // 'primary' => Color::Green,
+                'primary' => Color::hex('#0badb5'),  
             ])
             ->discoverResources(in: app_path('Filament/User/Resources'), for: 'App\\Filament\\User\\Resources')
             ->discoverPages(in: app_path('Filament/User/Pages'), for: 'App\\Filament\\User\\Pages')

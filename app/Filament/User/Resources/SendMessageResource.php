@@ -211,7 +211,7 @@ class SendMessageResource extends Resource
                 ->fileName('bulk_send_message_recipients')
                 ->defaultFormat('xlsx')
                 ->withHiddenColumns() // keeps hidden columns hidden
-                ->color('success')
+                ->color('primary')
                 ->icon('heroicon-o-arrow-down-tray'),
             ])
             ->actions([
