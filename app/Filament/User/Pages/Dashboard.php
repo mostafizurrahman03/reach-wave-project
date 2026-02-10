@@ -19,5 +19,15 @@ class Dashboard extends Page
             // other widgets...
         ];
     }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            \App\Filament\User\Widgets\DashboardStats::class,
+            // \App\Filament\User\Widgets\SmsBulkMessage::class,
+        ];
+    }
+
+    
     
 }
