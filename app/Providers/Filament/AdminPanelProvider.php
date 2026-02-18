@@ -32,6 +32,7 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->brandName('ReachWave')
             ->brandLogo(asset('/storage/images/logo.png'))
+            ->favicon(asset('favicon.png'))   
             ->brandLogoHeight('5rem')
             ->profile() 
             ->colors([

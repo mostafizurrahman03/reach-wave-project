@@ -13,6 +13,11 @@ use Carbon\Carbon;
 class DashboardStats extends StatsOverviewWidget
 {
     protected array|string|int $columnSpan = 12;
+    
+    function getHeading(): string
+    {
+        return 'Messages Sent Overview';
+    }
 
     protected function getStats(): array
     {

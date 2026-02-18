@@ -28,6 +28,7 @@ class UserPanelProvider extends PanelProvider
             ->login()
             ->brandName('WhatsReach')
             ->brandLogo(asset('/storage/images/logo.png'))
+            ->favicon(asset('favicon.png'))   
             ->brandLogoHeight('5rem')
             ->profile()
             ->passwordReset() 

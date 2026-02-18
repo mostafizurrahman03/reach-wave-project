@@ -13,7 +13,7 @@ class MessagesChart extends ChartWidget
     protected static ?string $heading = 'SMS Sent Per Month';
 
     protected static ?string $maxHeight = '300px';
-
+  
     protected function getData(): array
     {
         $user = Auth::user();
