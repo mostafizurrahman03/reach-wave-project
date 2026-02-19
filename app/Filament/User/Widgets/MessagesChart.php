@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class MessagesChart extends ChartWidget
 {
+    protected array|string|int $columnSpan = 12;
+    
     protected static ?string $heading = 'SMS Sent Per Month';
 
     protected static ?string $maxHeight = '300px';

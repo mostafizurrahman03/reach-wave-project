@@ -12,6 +12,7 @@ use App\Models\SmsBulkMessage;
 
 class AllMessagesStats extends StatsOverviewWidget
 {
+    protected array|string|int $columnSpan = 12;
     protected function getHeading(): string
     {
         return 'All Messages Overview';
@@ -19,34 +20,49 @@ class AllMessagesStats extends StatsOverviewWidget
 
     protected function getCards(): array
     {
+        
+        // TOTAL
+        
         $total = BulkMediaMessageRecipient::count()
             + BulkSendMessageRecipient::count()
             + SendMediaMessage::count()
             + SendMessage::count()
             + SmsBulkMessage::count();
 
-        $whatsapp = BulkMediaMessageRecipient::count()
-            + BulkSendMessageRecipient::count()
-            + SendMediaMessage::count()
-            + SendMessage::count();
+        
+        // WHATSAPP
+        
+        $whatsappDelivered =
+            BulkMediaMessageRecipient::where('is_sent', 1)->count()
+            + BulkSendMessageRecipient::where('is_sent', 1)->count()
+            + SendMediaMessage::where('is_sent', 1)->count()
+            + SendMessage::where('is_sent', 1)->count();
 
-        $sms = SmsBulkMessage::count();
+        $whatsappPending =
+            BulkMediaMessageRecipient::where('is_sent', 0)->count()
+            + BulkSendMessageRecipient::where('is_sent', 0)->count()
+            + SendMediaMessage::where('is_sent', 0)->count()
+            + SendMessage::where('is_sent', 0)->count();
+
+        
+        // SMS
+        
+        $smsDelivered = SmsBulkMessage::where('status', 'delivered')->count();
+        $smsPending   = SmsBulkMessage::where('status', 'pending')->count();
+        $smsFailed    = SmsBulkMessage::where('status', 'failed')->count();
 
         return [
             Card::make('Total Messages', $total)
                 ->description('All messages (SMS + WhatsApp)')
-                ->color('primary')
-                ->icon('heroicon-o-chat-bubble-left-right'),
+                ->color('primary'),
 
-            Card::make('WhatsApp Messages', $whatsapp)
-                ->color('success')
-                ->icon('heroicon-o-device-phone-mobile'),
+            Card::make('WhatsApp Delivered', $whatsappDelivered)
+                ->description("Pending: {$whatsappPending}")
+                ->color('success'),
 
-            Card::make('SMS Messages', $sms)
-                ->color('warning')
-                ->icon('heroicon-o-chat-bubble-left'),
-
+            Card::make('SMS Delivered', $smsDelivered)
+                ->description("Pending: {$smsPending} | Failed: {$smsFailed}")
+                ->color('warning'),
         ];
     }
 }
-

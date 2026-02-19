@@ -12,6 +12,7 @@ use Carbon\Carbon;
 
 class MessageChart extends LineChartWidget
 {
+    protected array|string|int $columnSpan = 12;
     protected static ?string $heading = 'Daily Messages (SMS & WhatsApp)';
 
     protected function getData(): array
