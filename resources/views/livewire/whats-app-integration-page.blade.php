@@ -147,6 +147,113 @@
     </div>
   </div>
 
+  <div class="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 py-24">
+
+    <!-- Decorative Blur -->
+    <div class="absolute -top-32 -left-32 w-96 h-96 bg-[#0F7B71]/10 rounded-full blur-3xl opacity-40"></div>
+    <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-emerald-200 rounded-full blur-3xl opacity-30"></div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+
+        <!-- ================= TOP SECTION ================= -->
+        <div class="grid lg:grid-cols-2 gap-16 items-center mb-24">
+
+            <!-- IMAGE SIDE -->
+            <div class="relative group">
+                <div class="absolute inset-0 bg-gradient-to-tr from-[#0F7B71]/20 to-emerald-400/20 rounded-3xl blur-2xl opacity-20 group-hover:opacity-30 transition"></div>
+
+                <div class="relative bg-white rounded-3xl p-8">
+                    <img src="{{ asset('storage/images/abc.png') }}"
+                         class="w-full h-auto rounded-xl"
+                         alt="WhatsApp Integration">
+                </div>
+            </div>
+
+            <!-- CONTENT SIDE -->
+            <div>
+                <h2 class="text-4xl lg:text-5xl font-bold leading-tight text-gray-900 mb-8">
+                    We are integrating
+                    <span class="text-[#0F7B71]">WhatsApp</span> with:
+                </h2>
+
+                <ul class="space-y-6 text-gray-600 leading-relaxed">
+                    @foreach([
+                        '"Customer service window" - 24 hours from receiving the last client message.',
+                        'If a client starts a WhatsApp conversation, no consent or templates are required within the service window.',
+                        'Messages outside the service window must follow a template (HSM) with prior client consent.',
+                        'Templates are pre-approved with WhatsApp and may include interactive buttons.',
+                        'If a customer responds to a template, the service window opens again.'
+                    ] as $item)
+                        <li class="flex gap-4 group">
+                            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-[#0F7B71]/10 text-[#0F7B71] font-semibold group-hover:scale-110 transition">
+                                ✓
+                            </div>
+                            <p class="text-base">
+                                {{ $item }}
+                            </p>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+
+        <!-- ================= MEDIA SECTION ================= -->
+        <div class="text-center mb-16">
+            <h3 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                Media <span class="text-[#0F7B71]">Attachments</span>
+            </h3>
+            <p class="text-gray-600 max-w-2xl mx-auto mb-8">
+                Share rich media seamlessly with your customers using WhatsApp Business integration.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 my-4">
+
+            @foreach([
+                ['icon'=>'🖼️','title'=>'Pictures & Photos','desc'=>'PNG and JPEG images up to 5MB'],
+                ['icon'=>'🎧','title'=>'Audio & Voice','desc'=>'MP3, OGG, AMR, AAC up to 16MB'],
+                ['icon'=>'🎥','title'=>'Video','desc'=>'MP4 and 3GPP up to 16MB'],
+                ['icon'=>'📁','title'=>'Documents','desc'=>'Files and archives up to 100MB'],
+            ] as $card)
+
+            <div class="group bg-white p-8 rounded-2xl shadow-sm border border-gray-100 
+              transition-all duration-300 ease-out
+              hover:-translate-y-3 
+              hover:shadow-2xl 
+              hover:border-[#0F7B71]/20
+              hover:bg-gradient-to-br hover:from-white hover:to-[#0F7B71]/5">
+
+                <!-- Icon -->
+                <div class="w-14 h-14 mx-auto flex items-center justify-center 
+                            rounded-xl bg-[#0F7B71]/10 text-[#0F7B71] text-2xl mb-5
+                            transition-all duration-300
+                            group-hover:bg-[#0F7B71] 
+                            group-hover:text-white 
+                            group-hover:scale-110">
+
+                    {{ $card['icon'] }}
+                </div>
+
+                <!-- Title -->
+                <h4 class="font-semibold text-lg text-gray-900 mb-2 
+                          transition-colors duration-300 
+                          group-hover:text-[#0F7B71]">
+                    {{ $card['title'] }}
+                </h4>
+
+                <!-- Description -->
+                <p class="text-sm text-gray-600 transition-colors duration-300">
+                    {{ $card['desc'] }}
+                </p>
+
+            </div>
+
+            @endforeach
+        </div>
+
+    </div>
+  </div>
+
   <!-- CTA -->
   <div class="bg-white py-20 rounded-2xl">
     <div class="max-w-7xl mx-auto px-6">
@@ -159,5 +266,6 @@
       </div>
     </div>
   </div>
+  <x-support-section />
 
 </section>

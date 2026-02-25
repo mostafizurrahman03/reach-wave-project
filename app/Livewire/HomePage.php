@@ -9,6 +9,6 @@ class HomePage extends Component
     public function render()
     {
         return view('livewire.home-page')
-               ->layout('components.layouts.app'); // <--- এখানে layout যুক্ত
+               ->layout('components.layouts.app'); 
     }
 }

@@ -25,7 +25,7 @@
                     <img src="https://i.pravatar.cc/56?img=1" alt="user" class="w-12 h-12 rounded-full ring-2 ring-white shadow">
                     <div>
                         <div class="flex items-center gap-2">
-                            <h4 class="font-semibold text-gray-900">Sarah Johnson</h4>
+                            <h4 class="font-semibold text-gray-900">Md. Rakib Hassan</h4>
                             <span class="inline-flex items-center rounded-full bg-[#D6F8E8] text-[#0F7B71] px-2 py-0.5 text-[11px] font-bold">Verified</span>
                         </div>
                         <span class="text-sm text-gray-500">Marketing Manager</span>
@@ -56,7 +56,7 @@
                     <img src="https://i.pravatar.cc/56?img=2" alt="user" class="w-12 h-12 rounded-full ring-2 ring-white shadow">
                     <div>
                         <div class="flex items-center gap-2">
-                            <h4 class="font-semibold text-gray-900">David Lee</h4>
+                            <h4 class="font-semibold text-gray-900">Mahmudul Hasan</h4>
                             <span class="inline-flex items-center rounded-full bg-[#D6F8E8] text-[#0F7B71] px-2 py-0.5 text-[11px] font-bold">Verified</span>
                         </div>
                         <span class="text-sm text-gray-500">Startup Founder</span>
@@ -87,7 +87,7 @@
                     <img src="https://i.pravatar.cc/56?img=3" alt="user" class="w-12 h-12 rounded-full ring-2 ring-white shadow">
                     <div>
                         <div class="flex items-center gap-2">
-                            <h4 class="font-semibold text-gray-900">Emily Carter</h4>
+                            <h4 class="font-semibold text-gray-900">Nafiz Arefin</h4>
                             <span class="inline-flex items-center rounded-full bg-[#D6F8E8] text-[#0F7B71] px-2 py-0.5 text-[11px] font-bold">Verified</span>
                         </div>
                         <span class="text-sm text-gray-500">Business Owner</span>

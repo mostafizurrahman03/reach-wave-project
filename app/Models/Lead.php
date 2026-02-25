@@ -18,24 +18,25 @@ class Lead extends Model
         'status'
     ];
 
-    /**
-     * Lead এর owner user
-     */
+    
+    // Owner user of the lead
+     
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * Lead যে campaign-এ আছে
-     */
+    
+    // Lead in the campaign
+     
     public function campaigns()
     {
         return $this->belongsToMany(Campaign::class, 'campaign_leads')
                     ->withPivot('status', 'sent_at')
                     ->withTimestamps();
     }
-     // Recipients relation
+
+    // Recipients relation
     public function recipients()
     {
         return $this->hasMany(LeadResource::class, 'lead_id');

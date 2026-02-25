@@ -164,6 +164,7 @@
     <x-solutions />
     <x-customers-love />
     <x-faq /> 
+    <x-support-section />
 </div>
 
 

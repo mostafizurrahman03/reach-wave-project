@@ -2,12 +2,12 @@
 
     <!-- Header -->
     <h1 class="text-4xl md:text-5xl font-extrabold text-center mb-3">
-        <span class="text-gray-900">Whats-Reach</span> 
+        <span class="text-gray-900">Reach-Wave</span> 
         <span class="text-[#0F7B71]">Features</span>
     </h1>
 
     <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">
-        WhatsApp bulk SMS sending service — fast, reliable, and scalable for your campaigns.
+        Omnichannel Messaging Solution — WhatsApp, SMS (Masking/Non-Masking) & IVR Services for Modern Businesses.
     </p>
 
     <!-- Feature Grid -->
@@ -58,7 +58,7 @@
     </div>
 
     <!-- CTA Button -->
-    <div class="text-center mt-12">
+    <div class="text-center mt-12 mb-4">
         <a href="#"
            class="inline-flex items-center gap-2 px-6 py-3 bg-[#0F7B71] hover:bg-[#0F7B71]/90 
                   text-white font-medium rounded-lg shadow transition-colors">
@@ -69,5 +69,7 @@
             </svg>
         </a>
     </div>
+    <x-support-section />
 
 </div>
+

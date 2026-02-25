@@ -81,4 +81,5 @@
 
         </div>
     </section>
+    <x-support-section />
 </div>
