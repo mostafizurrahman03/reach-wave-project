@@ -25,6 +25,7 @@ use App\Http\Controllers\ContactInformationController;
 use App\Http\Controllers\ClientMessageController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\Api\SmsController;
+use App\Livewire\SmsSending;
 
 
 Route::get('/user', function () {
@@ -52,6 +53,7 @@ Route::get('/features', FeaturesPage::class)->name('features');
 Route::get('/pricing', PricingPage::class)->name('pricing');
 Route::get('/contact', ContactPage::class)->name('contact');
 Route::get('/whats-app-integration', WhatsAppIntegrationPage::class)->name('whats-app-integration');
+Route::get('/sms-sending', SmsSending::class)->name('sms-sending');
     
 // Information for the website
 // Route::get('/contact-information', [ContactInformationController::class, 'index'])->name('contact-information');

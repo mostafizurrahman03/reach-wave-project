@@ -25,7 +25,7 @@
         <div class="absolute inset-0 rounded-[28px] bg-gradient-to-r from-teal-500/10 via-emerald-400/10 to-cyan-400/10 blur-2xl"></div>
 
         <!-- Main Card -->
-        <div class="relative rounded-[28px] bg-white/95 backdrop-blur-xl shadow-[0_12px_50px_-10px_rgba(0,0,0,0.15)] ring-1 ring-black/5 overflow-hidden transition-all duration-300 hover:shadow-[0_18px_65px_-8px_rgba(0,0,0,0.25)] hover:scale-[1.01]">
+        <div class="relative bg-white/95 backdrop-blur-xl shadow-[0_12px_50px_-10px_rgba(0,0,0,0.15)] ring-1 ring-black/5 overflow-hidden transition-all duration-300 hover:shadow-[0_18px_65px_-8px_rgba(0,0,0,0.25)] hover:scale-[1.01] rounded-xl">
 
           <!-- Browser Bar -->
           <div class="flex items-center gap-2 px-5 py-3 border-b border-gray-200 bg-gradient-to-br from-gray-50 to-gray-100">
@@ -257,7 +257,7 @@
   <!-- CTA -->
   <div class="bg-white py-20 rounded-2xl">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="bg-[#0F7B71] text-white text-center py-14 rounded-3xl">
+      <div class="bg-[#0F7B71] text-white text-center py-14 rounded-xl">
         <h2 class="text-3xl font-bold mb-3">Ready to Transform Your Customer Communication?</h2>
         <p class="text-sm opacity-90 mb-6">Start free or talk to our product expert.</p>
         <a href="{{ route('contact') }}" class="px-8 py-3 p-4 rounded-xl bg-white text-[#0F7B71] font-semibold hover:bg-gray-100 transition">

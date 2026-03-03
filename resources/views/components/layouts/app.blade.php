@@ -40,6 +40,9 @@
                         <a href="{{ route('whats-app-integration') }}" class="px-1.5 py-1 rounded transition-colors {{ request()->routeIs('whats-app-integration') ? 'text-[#0F7B71]' : 'text-gray-700 hover:text-[#0F7B71]' }}">Whatsapp Integration</a>
                     </li>
                     <li>
+                        <a href="{{ route('sms-sending') }}" class="px-1.5 py-1 rounded transition-colors {{ request()->routeIs('sms-sending') ? 'text-[#0F7B71]' : 'text-gray-700 hover:text-[#0F7B71]' }}">Sms Sending</a>
+                    </li>
+                    <li>
                         <a href="{{ route('features') }}" class="px-1.5 py-1 rounded transition-colors {{ request()->routeIs('features') ? 'text-[#0F7B71]' : 'text-gray-700 hover:text-[#0F7B71]' }}">Features</a>
                     </li>
                     <li>
